@@ -26,6 +26,8 @@ return new class extends Migration {
         Schema::create('transaction_voucher', function (Blueprint $table) {
             $table->foreignIdFor(Voucher::class);
             $table->foreignIdFor(Transaction::class);
+            $table->innoDb();
+            $table->collation('utf8mb4_persian_ci');
         });
     }
 
