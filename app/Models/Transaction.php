@@ -2,26 +2,17 @@
 
 namespace App\Models;
 
-use App\Events\TransactionSavedEvent;
-use App\Exceptions\INSUFFICIENT_FUNDS;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Throwable;
 
 class Transaction extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    const VOUCHER = 10;
-    const DEPOSIT = 20;
-    const WITHDRAWAL = 30;
 
     protected $fillable = [
         'account_id',
@@ -48,7 +39,7 @@ class Transaction extends Model
 
     public function getSignedAmount()
     {
-        if (in_array($this->type, [static::WITHDRAWAL])) {
+        if (in_array($this->type, [TransactionsEnum::toCode(TransactionsEnum::WITHDRAWAL)])) {
             return $this->amount * -1;
         }
 

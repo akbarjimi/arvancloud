@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Transaction;
+use App\Models\TransactionsEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 
@@ -12,10 +12,10 @@ class TransactionFactory extends Factory
     {
         return [
             'account_id' => null,
-            'amount' => random_int(50000, 50000*40 /** 2,000,000 */),
+            'amount' => random_int(50000, 50000 * 40/** 2,000,000 */),
             'type' => Arr::random([
-                Transaction::DEPOSIT,
-                Transaction::WITHDRAWAL,
+                TransactionsEnum::toCode(TransactionsEnum::DEPOSIT),
+                TransactionsEnum::toCode(TransactionsEnum::WITHDRAWAL),
             ]),
             'balance' => 0,
             'description' => $this->faker->text(),
@@ -27,8 +27,8 @@ class TransactionFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'account_id' => null,
-                'amount' => 50000*20 /** 1,000,000 */,
-                'type' => Transaction::VOUCHER,
+                'amount' => 50000 * 20/** 1,000,000 */,
+                'type' => TransactionsEnum::toCode(TransactionsEnum::VOUCHER),
                 'balance' => 0,
                 'description' => trans("strings.transactions.fee.message"),
             ];

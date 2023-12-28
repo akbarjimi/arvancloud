@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Account;
 use App\Models\Transaction;
+use App\Models\TransactionsEnum;
 use Illuminate\Database\Seeder;
 
 class TransactionSeeder extends Seeder
@@ -15,7 +16,7 @@ class TransactionSeeder extends Seeder
         /** @var Account $account */
         foreach (Account::all() as $account) {
             $account->transactions()->create(Transaction::factory()->makeOne([
-                'type' => Transaction::DEPOSIT,
+                'type' => TransactionsEnum::toCode(TransactionsEnum::DEPOSIT),
                 'description' => "پول اولیه",
             ])->toArray())->updateBalance();
         }

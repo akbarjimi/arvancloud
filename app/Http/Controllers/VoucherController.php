@@ -31,7 +31,7 @@ class VoucherController extends Controller
             /** @var Transaction $transaction */
             $transaction = $account->transactions()->create([
                 'amount' => $voucher->value,
-                'type' => Transaction::VOUCHER,
+                'type' => TransactionsEnum::toCode(TransactionsEnum::VOUCHER),
                 'description' => "from voucher: " . $voucher->code,
             ]);
             $transaction->updateBalance();
