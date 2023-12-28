@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VoucherReportFormRequest;
 use App\Http\Requests\VoucherSubmitFormRequest;
+use App\Http\Resources\UserCollection;
 use App\Http\Resources\VoucherApplyingFailed;
 use App\Http\Resources\VoucherApplyingSuccessful;
-use App\Models\Account;
 use App\Models\Transaction;
 use App\Models\TransactionsEnum;
 use App\Models\User;
 use App\Models\Voucher;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -56,8 +56,14 @@ class VoucherController extends Controller
         }
     }
 
-    public function report(Request $request)
+    public function report(VoucherReportFormRequest $request)
     {
-
+        /** @var Voucher $voucher */
+        $voucher = Voucher::with('transactions.user')->where('code', $request->post('code'))->first();
+        $users = [];
+        foreach ($voucher->transactions as $transaction) {
+            $users[] = $transaction->user;
+        }
+        return new UserCollection($users);
     }
 }
