@@ -22,10 +22,16 @@ return new class extends Migration {
             $table->innoDb();
             $table->collation('utf8mb4_persian_ci');
         });
+
+        Schema::create('transaction_voucher', function (Blueprint $table) {
+            $table->foreignIdFor(Voucher::class);
+            $table->foreignIdFor(Transaction::class);
+        });
     }
 
     public function down(): void
     {
+        Schema::dropIfExists('transaction_voucher');
         Schema::dropIfExists('transactions');
     }
 };

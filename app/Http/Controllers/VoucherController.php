@@ -34,6 +34,7 @@ class VoucherController extends Controller
                 'description' => "from voucher: " . $voucher->code,
             ]);
             $transaction->updateBalance();
+            $voucher->transactions()->save($transaction);
             $voucher->update([
                 'used' => $voucher->used + 1,
                 'expire_at' => $voucher->expire_at
