@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Models\TransactionsEnum;
+use App\Enum\TransactionsEnum;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 

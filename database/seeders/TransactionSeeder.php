@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enum\TransactionsEnum;
 use App\Models\Transaction;
-use App\Models\TransactionsEnum;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 

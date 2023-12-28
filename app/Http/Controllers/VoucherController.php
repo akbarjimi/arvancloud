@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\TransactionsEnum;
 use App\Http\Requests\VoucherReportFormRequest;
 use App\Http\Requests\VoucherSubmitFormRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\VoucherApplyingFailed;
 use App\Http\Resources\VoucherApplyingSuccessful;
 use App\Models\Transaction;
-use App\Models\TransactionsEnum;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Support\Facades\DB;

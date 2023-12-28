@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\TransactionsEnum;
+use App\Enum\TransactionsEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 
