@@ -22,11 +22,6 @@ class Transaction extends Model
         'description',
     ];
 
-
-//    protected $dispatchesEvents = [
-//        'created' => TransactionSavedEvent::class,
-//    ];
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
