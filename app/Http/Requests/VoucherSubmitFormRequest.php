@@ -29,10 +29,10 @@ class VoucherSubmitFormRequest extends FormRequest
                 function (string $name, $value, $fail, $validator) {
                     $voucher = Voucher::where('code', $value)->first();
                     if ($voucher->expire_at->isPast()) {
-                        $fail("expired");
+                        $fail("validation.voucher.expired");
                     }
                     if ($voucher->used >= $voucher->use) {
-                        $fail("max uses");
+                        $fail("validation.voucher.used_up");
                     }
                 }
             ],

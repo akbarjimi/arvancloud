@@ -12,9 +12,9 @@ class VoucherApplyingFailed extends JsonResource
         return [
             'success' => false,
             'error' => [
-                'message' => trans('strings.transfer_failed.insufficient_funds.message'),
+                'message' => trans('strings.voucher.applying_failed.message'),
                 'code' => $this->resource['code'],
-                'details' => trans('strings.transfer_failed.insufficient_funds.details'),
+                'details' => trans('strings.voucher.applying_failed.details'),
             ],
         ];
     }

@@ -29,9 +29,9 @@ enum TransactionsEnum
     public static function toString(TransactionsEnum $enum): string
     {
         return match ($enum) {
-            TransactionsEnum::VOUCHER => 'کد تخفیف',
-            TransactionsEnum::DEPOSIT => 'سپرده',
-            TransactionsEnum::WITHDRAWAL => 'برداشت',
+            TransactionsEnum::VOUCHER => trans('strings.transactions.voucher'),
+            TransactionsEnum::DEPOSIT => trans('strings.transactions.deposit'),
+            TransactionsEnum::WITHDRAWAL => trans('strings.transactions.withdrawal'),
         };
     }
     public static function codeToString(int $code): string

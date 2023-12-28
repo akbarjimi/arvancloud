@@ -17,7 +17,7 @@ class TransactionSeeder extends Seeder
         foreach (User::all() as $user) {
             $user->transactions()->create(Transaction::factory()->makeOne([
                 'type' => TransactionsEnum::toCode(TransactionsEnum::DEPOSIT),
-                'description' => "پول اولیه",
+                'description' => trans("strings.transactions.seed"),
             ])->toArray())->updateBalance();
         }
 

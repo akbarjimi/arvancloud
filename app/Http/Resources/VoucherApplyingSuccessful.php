@@ -11,7 +11,7 @@ class VoucherApplyingSuccessful extends JsonResource
     {
         return [
             'success' => true,
-            'message' => trans('strings.transfer_succeed.message'),
+            'message' => trans('strings.voucher.applied.message'),
             'transaction' => [
                 'code' => $this->resource['code'],
                 'amount' => $this->resource['amount'],

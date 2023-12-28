@@ -30,7 +30,7 @@ class TransactionFactory extends Factory
                 'amount' => 50000 * 20/** 1,000,000 */,
                 'type' => TransactionsEnum::toCode(TransactionsEnum::VOUCHER),
                 'balance' => 0,
-                'description' => trans("strings.transactions.fee.message"),
+                'description' => trans("strings.transactions.voucher"),
             ];
         });
     }
