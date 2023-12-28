@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
@@ -15,7 +14,7 @@ class Transaction extends Model
 
 
     protected $fillable = [
-        'account_id',
+        'user_id',
         'amount',
         'type',
         'balance',
@@ -27,14 +26,9 @@ class Transaction extends Model
 //        'created' => TransactionSavedEvent::class,
 //    ];
 
-    public function account(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Account::class);
-    }
-
-    public function user(): HasOneThrough
-    {
-        return $this->hasOneThrough(User::class, Account::class);
+        return $this->belongsTo(User::class);
     }
 
     public function getSignedAmount()
@@ -49,9 +43,7 @@ class Transaction extends Model
     public function updateBalance(): void
     {
         $this->update([
-            'balance' => $this->account->transactions()
-                    ->whereKeyNot($this->id)->latest($this->getKeyName())
-                    ->first()?->balance + $this->getSignedAmount(),
+            'balance' => $this->user->latestTransaction->balance + $this->getSignedAmount(),
         ]);
     }
 }

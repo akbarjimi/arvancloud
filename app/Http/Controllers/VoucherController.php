@@ -27,11 +27,8 @@ class VoucherController extends Controller
             /** @var User $user */
             $user = User::where('mobile', $request->post('mobile'))->first();
 
-            /** @var Account $account */
-            $account = $user->account()->first();
-
             /** @var Transaction $transaction */
-            $transaction = $account->transactions()->create([
+            $transaction = $user->transactions()->create([
                 'amount' => $voucher->value,
                 'type' => TransactionsEnum::toCode(TransactionsEnum::VOUCHER),
                 'description' => "from voucher: " . $voucher->code,
