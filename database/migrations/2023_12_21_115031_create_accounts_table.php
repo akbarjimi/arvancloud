@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->foreignIdFor(User::class);
             $table->timestamps();
             $table->softDeletes();
+            $table->innoDb();
+            $table->collation('utf8mb4_persian_ci');
         });
     }
 

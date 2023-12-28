@@ -19,6 +19,8 @@ return new class extends Migration
             $table->longText('payload');
             $table->longText('exception');
             $table->timestamp('failed_at')->useCurrent();
+            $table->innoDb();
+            $table->collation('utf8mb4_persian_ci');
         });
     }
 

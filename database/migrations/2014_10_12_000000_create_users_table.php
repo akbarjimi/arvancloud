@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->innoDb();
+            $table->collation('utf8mb4_persian_ci');
         });
     }
 

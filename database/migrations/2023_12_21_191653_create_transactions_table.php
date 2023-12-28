@@ -17,6 +17,8 @@ return new class extends Migration {
             $table->text('description');
             $table->timestamps();
             $table->softDeletes();
+            $table->innoDb();
+            $table->collation('utf8mb4_persian_ci');
         });
     }
 

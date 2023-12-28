@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->timestamp('expire_at');
             $table->timestamps();
             $table->softDeletes();
+            $table->innoDb();
+            $table->collation('utf8mb4_persian_ci');
         });
     }
 
