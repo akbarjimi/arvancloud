@@ -28,9 +28,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function accounts()
+    public function account()
     {
-        return $this->hasMany(Account::class);
+        return $this->hasOne(Account::class);
     }
 
     public function transactions(): HasManyThrough
