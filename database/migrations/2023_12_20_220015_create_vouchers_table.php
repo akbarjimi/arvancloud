@@ -10,8 +10,9 @@ return new class extends Migration {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->unsignedBigInteger('used')->default(0);
             $table->unsignedBigInteger('use')->default(0);
+            $table->unsignedBigInteger('used')->default(0);
+            $table->unsignedBigInteger('used_up_to')->default(1);
             $table->unsignedBigInteger('value')->default(0);
             $table->timestamp('expire_at');
             $table->timestamps();

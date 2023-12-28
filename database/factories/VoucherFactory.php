@@ -11,8 +11,9 @@ class VoucherFactory extends Factory
     {
         return [
             'code' => Str::random(6),
-            'used' => 0,
             'use' => 1000,
+            'used' => 0,
+            'used_up_to' => 1,
             'value' => 50000 * 20/** 1,000,000 */,
             'expire_at' => now()->addDay(),
         ];

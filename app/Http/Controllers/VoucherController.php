@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enum\TransactionsEnum;
+use App\Exceptions\VoucherMaxUse;
 use App\Http\Requests\VoucherReportFormRequest;
 use App\Http\Requests\VoucherSubmitFormRequest;
 use App\Http\Resources\UserCollection;
@@ -27,6 +28,11 @@ class VoucherController extends Controller
             /** @var User $user */
             $user = User::where('mobile', $request->post('mobile'))->first();
 
+            $uses = $voucher->transactions()->whereRelation('user', 'id', '=', $user->id)->get();
+            if ($uses->count() >= $voucher->used_up_to) {
+                throw new VoucherMaxUse($voucher->code);
+            }
+
             /** @var Transaction $transaction */
             $transaction = $user->transactions()->create([
                 'amount' => $voucher->value,
@@ -47,6 +53,9 @@ class VoucherController extends Controller
                 'amount' => $voucher->value,
                 'timestamp' => now()->toDateTimeString(),
             ]);
+
+        } catch (VoucherMaxUse $throwable) {
+            throw $throwable;
         } catch (Throwable $throwable) {
             DB::rollBack();
             report($throwable);

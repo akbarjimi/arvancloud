@@ -16,6 +16,7 @@ class Voucher extends Model
         'code',
         'used',
         'use',
+        'used_up_to',
         'value',
         'expire_at',
     ];
