@@ -72,6 +72,6 @@ class VoucherController extends Controller
         foreach ($voucher->transactions as $transaction) {
             $users[] = $transaction->user;
         }
-        return new UserCollection($users);
+        return new UserCollection(collect($users)->unique('mobile'));
     }
 }
