@@ -27,13 +27,16 @@ class VoucherSubmitFormRequest extends FormRequest
                 'required',
                 'alpha_num',
                 'exists:vouchers,code',
-                function (string $name, $value, $fail, $validator) {
+                function (string $name, $value, $fail) {
                     $voucher = Voucher::where('code', $value)->first();
                     if (Carbon::make($voucher->expire_at)->isPast()) {
-                        $fail("validation.voucher.expired");
+                        $fail("validation.voucher.expired")->translate();
                     }
+                },
+                function (string $name, $value, $fail) {
+                    $voucher = Voucher::where('code', $value)->first();
                     if ($voucher->used >= $voucher->use) {
-                        $fail("validation.voucher.used_up");
+                        $fail("validation.voucher.used_up")->translate();
                     }
                 }
             ],
