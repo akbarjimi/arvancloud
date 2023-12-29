@@ -39,7 +39,9 @@ class Transaction extends Model
     public function updateBalance(): void
     {
         $this->update([
-            'balance' => $this->user->latestTransaction->balance + $this->getSignedAmount(),
+            'balance' => $this->user->transactions()
+                    ->whereKeyNot($this->id)->latest($this->getKeyName())
+                    ->first()?->balance + $this->getSignedAmount(),
         ]);
     }
 }
