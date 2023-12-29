@@ -43,7 +43,6 @@ class VoucherController extends Controller
             $voucher->transactions()->save($transaction);
             $voucher->update([
                 'used' => $voucher->used + 1,
-                'expire_at' => $voucher->expire_at
             ]);
 
             DB::commit();

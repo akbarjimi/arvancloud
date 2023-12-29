@@ -21,9 +21,6 @@ class Voucher extends Model
         'expire_at',
     ];
 
-    protected $casts = [
-        'expire_at' => 'datetime'
-    ];
 
     public function transactions(): BelongsToMany
     {

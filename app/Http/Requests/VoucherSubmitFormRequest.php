@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Voucher;
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class VoucherSubmitFormRequest extends FormRequest
@@ -28,7 +29,7 @@ class VoucherSubmitFormRequest extends FormRequest
                 'exists:vouchers,code',
                 function (string $name, $value, $fail, $validator) {
                     $voucher = Voucher::where('code', $value)->first();
-                    if ($voucher->expire_at->isPast()) {
+                    if (Carbon::make($voucher->expire_at)->isPast()) {
                         $fail("validation.voucher.expired");
                     }
                     if ($voucher->used >= $voucher->use) {
